@@ -8,12 +8,14 @@ import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { UserFullNamePipe } from './pipes/user-full-name.pipe';
+import { FontTitlesDirective } from './directives/font-titles.directive';
 
 
 
 @NgModule({
   declarations: [
-    UserFullNamePipe
+    UserFullNamePipe,
+    FontTitlesDirective
   ],
   imports: [
     CommonModule
