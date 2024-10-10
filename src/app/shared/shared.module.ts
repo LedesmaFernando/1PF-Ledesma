@@ -26,7 +26,7 @@ import { UserFullNamePipe } from './pipes/user-full-name.pipe';
     MatSelectModule,
     ReactiveFormsModule,
     MatTableModule,
-    UserFullNamePipe
+    UserFullNamePipe,
 
   ]
 })
