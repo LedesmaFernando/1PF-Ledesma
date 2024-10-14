@@ -5,10 +5,10 @@ import { User } from './models';
 
 
 const ELEMENT_DATA: User[] = [
-  {id: '1', firsName: 'Juan', lastName: 'Perez', email:'jperez@gmail.com', createdAt: new Date},
-  {id: '2', firsName:'Jose', lastName:'Gonzales',email:'jgonzales@gmail.com', createdAt: new Date},
-  {id: '3', firsName:'Facundo', lastName:'Duran', email:'fduran@gmail.com', createdAt: new Date},
-  {id: '4', firsName:'Fernando', lastName:'Ledesma', email:'fledesma.com', createdAt: new Date},
+  {id: '1', firstName: 'Juan', lastName: 'Perez', email:'jperez@gmail.com', createdAt: new Date},
+  {id: '2', firstName:'Jose', lastName:'Gonzales',email:'jgonzales@gmail.com', createdAt: new Date},
+  {id: '3', firstName:'Facundo', lastName:'Duran', email:'fduran@gmail.com', createdAt: new Date},
+  {id: '4', firstName:'Fernando', lastName:'Ledesma', email:'fledesma.com', createdAt: new Date},
 ];
 
 
@@ -27,15 +27,33 @@ export class UsersComponent {
   constructor(private matDialog: MatDialog){}
 
 
-  openModal(): void{
-    this.matDialog.open(UsersDialogComponent)
+  onDelete(id:string):void{
+    if(confirm("estas seguro?")){
+      this.dataSource = this.dataSource.filter((user)=> user.id !== id);
+    }
+    
+  }
+
+  openModal(editingUser?:User): void{
+    this.matDialog.open(UsersDialogComponent, {
+      data: {
+        editingUser,
+      }
+    })
     .afterClosed()
     .subscribe({
       next:(result)=>{
         console.log("Recibimos: ", result);
 
         if(!!result){
-          [...this.dataSource, {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'}];
+
+          if(editingUser){
+            this.dataSource = this.dataSource.map((user) => user.id === editingUser.id ? {...user,...result} : user );  
+          }else{
+            this.dataSource = [...this.dataSource,{
+            ...result, id: this.dataSource.length+1, createdAt: new Date()
+          }]
+          }
         }
       }
     })

@@ -1,14 +1,18 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit } from '@angular/core'; 
 
 @Directive({
   selector: '[appFontTitles]'
 })
-export class FontTitlesDirective {
+export class FontTitlesDirective implements AfterViewInit {
 
-  constructor(private el:ElementRef) { }
+  constructor(private el: ElementRef<HTMLElement>) { }
 
-  applyStyles():void{
-    this.el.nativeElement.style.fontSize = '100px';
+  ngAfterViewInit(): void {
+    this.applyStyles();
   }
 
+  applyStyles(): void {
+    this.el.nativeElement.style.fontSize = '20px';
+    this.el.nativeElement.style.marginLeft = '60px';
+  }
 }

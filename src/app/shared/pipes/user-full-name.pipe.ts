@@ -7,8 +7,8 @@ import { User } from '../../features/dashboard/users/models';
 export class UserFullNamePipe implements PipeTransform {
 
   transform(value: User, ...args: unknown[]): string{
-    const result = value.firsName+' '+value.lastName;
-    return result;
+    const result = value.firstName+' '+value.lastName;
+    return result.toLocaleUpperCase();
   }
 
 }

@@ -29,6 +29,7 @@ import { FontTitlesDirective } from './directives/font-titles.directive';
     ReactiveFormsModule,
     MatTableModule,
     UserFullNamePipe,
+    FontTitlesDirective
 
   ]
 })
