@@ -35,7 +35,6 @@ export class UsersDialogComponent {
 
   patchFormValue(){
     if(this.data?.editingUser){
-      console.log("parche");
       this.userForm.patchValue(this.data.editingUser);
     }
   }

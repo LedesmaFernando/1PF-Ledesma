@@ -1,15 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersDialogComponent } from './users-dialog/users-dialog.component';
 import { User } from './models';
+import { UsersService } from '../../../core/services/users.service';
 
 
-const ELEMENT_DATA: User[] = [
-  {id: '1', firstName: 'Juan', lastName: 'Perez', email:'jperez@gmail.com', createdAt: new Date},
-  {id: '2', firstName:'Jose', lastName:'Gonzales',email:'jgonzales@gmail.com', createdAt: new Date},
-  {id: '3', firstName:'Facundo', lastName:'Duran', email:'fduran@gmail.com', createdAt: new Date},
-  {id: '4', firstName:'Fernando', lastName:'Ledesma', email:'fledesma.com', createdAt: new Date},
-];
+
 
 
 
@@ -18,18 +14,34 @@ const ELEMENT_DATA: User[] = [
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit{
 
   displayedColumns: string[] = ['id', 'name', 'email', 'date', 'actions'];
-  dataSource = ELEMENT_DATA;
+  dataSource: User[] = [];
 
 
-  constructor(private matDialog: MatDialog){}
+  constructor(private matDialog: MatDialog, private userService: UsersService){}
+
+
+  ngOnInit(): void {
+    this.loadUsers();
+    
+  }
+
+  loadUsers(): void {
+    this.userService.getUsers().subscribe({
+      next:(users) => {
+        this.dataSource = users;        
+      }
+    })
+  }
 
 
   onDelete(id:string):void{
     if(confirm("estas seguro?")){
-      this.dataSource = this.dataSource.filter((user)=> user.id !== id);
+      this.userService.removeUserById(id).subscribe({
+        next:(users) => {this.dataSource = users}
+      })
     }
     
   }
@@ -48,7 +60,7 @@ export class UsersComponent {
         if(!!result){
 
           if(editingUser){
-            this.dataSource = this.dataSource.map((user) => user.id === editingUser.id ? {...user,...result} : user );  
+            this.handleUpdate(editingUser.id, result)  
           }else{
             this.dataSource = [...this.dataSource,{
             ...result, id: this.dataSource.length+1, createdAt: new Date()
@@ -56,6 +68,12 @@ export class UsersComponent {
           }
         }
       }
+    })
+  }
+
+  handleUpdate(id:string, update: User):void{
+    this.userService.updateUsersById(id, update).subscribe({
+      next:(users) => {this.dataSource = users}
     })
   }
 
