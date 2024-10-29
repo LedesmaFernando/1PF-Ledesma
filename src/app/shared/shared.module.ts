@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { UserFullNamePipe } from './pipes/user-full-name.pipe';
 import { FontTitlesDirective } from './directives/font-titles.directive';
+import {MatListModule} from '@angular/material/list';
 
 
 
@@ -29,7 +30,8 @@ import { FontTitlesDirective } from './directives/font-titles.directive';
     ReactiveFormsModule,
     MatTableModule,
     UserFullNamePipe,
-    FontTitlesDirective
+    FontTitlesDirective,
+    MatListModule,
 
   ]
 })

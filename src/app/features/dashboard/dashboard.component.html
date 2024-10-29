@@ -1,13 +1,14 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
       <h3>Secciones</h3>
-      <!-- @if (showFiller) {
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-      }
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Toggle extra text
-      </button> -->
-      <p>links</p>
+
+      <mat-nav-list>
+       <a routerLink="" mat-list-item>INICIO</a>
+       <a routerLink="/dashboard" mat-list-item>USUARIOS</a>
+       <a routerLink="" mat-list-item>CURSOS</a>
+       <a routerLink="/auth/login" mat-list-item>CERRAR SESION</a>
+      </mat-nav-list>
+    
     </mat-drawer>
   
     <div class="example-sidenav-content">
