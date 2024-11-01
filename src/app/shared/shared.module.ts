@@ -19,7 +19,7 @@ import {MatListModule} from '@angular/material/list';
     FontTitlesDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports:[
     MatButtonModule,

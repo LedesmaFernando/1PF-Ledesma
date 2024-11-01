@@ -6,6 +6,11 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
+    path:'dashboard',
+    component: DashboardComponent,
+    loadChildren:()=> import('./features/dashboard/dashboard.module').then((archive)=>archive.DashboardModule)
+  },
+  {
     path:'auth',
     component: AuthComponent,
     loadChildren:()=> import('./features/auth/auth.module').then((archive)=> archive.AuthModule)

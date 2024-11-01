@@ -4,11 +4,11 @@ import { Observable, of } from 'rxjs';
 
 
 
-let DATABASE: User[] = [
-  {id: '1', firstName: 'Juan', lastName: 'Perez', email:'jperez@gmail.com', createdAt: new Date},
-  {id: '2', firstName:'Jose', lastName:'Gonzales',email:'jgonzales@gmail.com', createdAt: new Date},
-  {id: '3', firstName:'Facundo', lastName:'Duran', email:'fduran@gmail.com', createdAt: new Date},
-  {id: '4', firstName:'Fernando', lastName:'Ledesma', email:'fledesma.com', createdAt: new Date},
+let DATABASE_USERS: User[] = [
+  {id: '1', firstName: 'Juan', lastName: 'Perez', course:'carpinteria', email:'jperez@gmail.com', createdAt: new Date},
+  {id: '2', firstName:'Jose', lastName:'Gonzales', course:'carpinteria',email:'jgonzales@gmail.com', createdAt: new Date},
+  {id: '3', firstName:'Facundo', lastName:'Duran', course:'carpinteria', email:'fduran@gmail.com', createdAt: new Date},
+  {id: '4', firstName:'Fernando', lastName:'Ledesma', course:'carpinteria', email:'fledesma.com', createdAt: new Date},
 ];
 
 
@@ -21,21 +21,21 @@ export class UsersService {
 
   getUsers(): Observable<User[]>{
     return new Observable((observer)=>{
-      observer.next(DATABASE);
+      observer.next(DATABASE_USERS);
     })
   }
 
   updateUsersById(id:string, update: Partial<User>){
-    DATABASE = DATABASE.map((user)=> 
+    DATABASE_USERS = DATABASE_USERS.map((user)=> 
       user.id === id ? {...user,...update}: user );
     return new Observable<User[]>((observer)=>
-      observer.next(DATABASE)
+      observer.next(DATABASE_USERS)
     )
   }
 
   removeUserById(id:string):Observable<User[]>{
-    DATABASE = DATABASE.filter((user) => user.id != id);
-    return of(DATABASE);
+    DATABASE_USERS = DATABASE_USERS.filter((user) => user.id != id);
+    return of(DATABASE_USERS);
 
   }
 }

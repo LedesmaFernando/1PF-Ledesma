@@ -3,9 +3,9 @@
       <h3>Secciones</h3>
 
       <mat-nav-list>
-       <a routerLink="" mat-list-item>INICIO</a>
-       <a routerLink="/dashboard" mat-list-item>USUARIOS</a>
-       <a routerLink="" mat-list-item>CURSOS</a>
+       <a routerLink="/dashboard" mat-list-item>INICIO</a>
+       <a routerLink="/dashboard/users" mat-list-item>ALUMNOS</a>
+       <a routerLink="/dashboard/courses" mat-list-item>CURSOS</a>
        <a routerLink="/auth/login" mat-list-item>CERRAR SESION</a>
       </mat-nav-list>
     
@@ -16,9 +16,12 @@
             <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
               <mat-icon>menu</mat-icon>
             </button>
-            <span>Tabla de Alumnos</span>
+            <span>Menú</span>
           </mat-toolbar>
-          <app-users />
+
+          <!-- aca debe ir el router -->
+           <router-outlet></router-outlet>
+          <!-- <app-users /> -->
     </div>
   
   </mat-drawer-container>

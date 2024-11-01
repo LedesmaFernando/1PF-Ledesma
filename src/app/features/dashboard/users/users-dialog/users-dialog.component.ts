@@ -28,6 +28,7 @@ export class UsersDialogComponent {
     this.userForm = this.formBuilder.group({
       firstName:[null, [Validators.required]],
       lastName:[null, [Validators.required]],
+      course:[null, [Validators.required]],
       email:[null, [Validators.required]],
     });
     this.patchFormValue();
