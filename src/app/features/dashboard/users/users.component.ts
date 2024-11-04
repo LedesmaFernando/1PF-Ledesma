@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UsersDialogComponent } from './users-dialog/users-dialog.component';
 import { User } from './models';
 import { UsersService } from '../../../core/services/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -20,8 +21,12 @@ export class UsersComponent implements OnInit{
   dataSource: User[] = [];
 
 
-  constructor(private matDialog: MatDialog, private userService: UsersService){}
-
+  constructor(
+    private matDialog: MatDialog, 
+    private userService: UsersService, 
+    private router:Router,
+    private activatedRoute: ActivatedRoute){}
+    // activatedRoute -> permite usar rutas relativas en el navitate
 
   ngOnInit(): void {
     this.loadUsers();
@@ -44,6 +49,10 @@ export class UsersComponent implements OnInit{
       })
     }
     
+  }
+
+  goToDetail(id:string):void{
+    this.router.navigate([id,'detail'],{ relativeTo: this.activatedRoute })    
   }
 
   openModal(editingUser?:User): void{

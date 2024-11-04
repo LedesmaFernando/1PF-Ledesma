@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../features/dashboard/users/models';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+
 
 
 
@@ -24,6 +25,12 @@ export class UsersService {
       observer.next(DATABASE_USERS);
     })
   }
+
+  getUsersById(id:string):Observable<User | undefined>{
+    return this.getUsers().pipe(map((users)=> users.find((u)=>u.id === id)))
+  }
+
+  // }
 
   updateUsersById(id:string, update: Partial<User>){
     DATABASE_USERS = DATABASE_USERS.map((user)=> 

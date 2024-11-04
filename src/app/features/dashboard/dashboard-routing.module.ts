@@ -3,20 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { CoursesComponent } from './courses/courses.component';
 import { HomeComponent } from './home/home.component';
-
+import { UsersModule } from './users/users.module';
+import { CoursesModule } from './courses/courses.module';
+import { HomeModule } from './home/home.module';
 
 const routes: Routes = [
   {
     path:'users',
-    component:UsersComponent
+    loadChildren: ()=> UsersModule
   },
   {
     path:'courses',
-    component:CoursesComponent
+    loadChildren: ()=> CoursesModule
   },
   {
     path:'home',
-    component:HomeComponent
+    loadChildren: ()=> HomeModule
   },
   {
     path:'**',

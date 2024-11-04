@@ -6,7 +6,7 @@
        <a routerLink="/dashboard/home" mat-list-item>INICIO</a>
        <a routerLink="/dashboard/users" mat-list-item>ALUMNOS</a>
        <a routerLink="/dashboard/courses" mat-list-item>CURSOS</a>
-       <a routerLink="/auth/login" mat-list-item>CERRAR SESION</a>
+       <a (click)="logOut()" mat-list-item>CERRAR SESION</a>
       </mat-nav-list>
     
     </mat-drawer>

@@ -7,12 +7,14 @@ import { SharedModule } from '../../../shared/shared.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UsersDialogComponent } from './users-dialog/users-dialog.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UsersDialogComponent
+    UsersDialogComponent,
+    UserDetailComponent
   ],
   imports: [
     CommonModule,

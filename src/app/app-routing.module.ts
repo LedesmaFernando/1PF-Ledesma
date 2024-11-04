@@ -16,10 +16,6 @@ const routes: Routes = [
     loadChildren:()=> import('./features/auth/auth.module').then((archive)=> archive.AuthModule)
   },
   {
-    path:'dashboard',
-    component:DashboardComponent
-  },
-  {
     path:'**',
     redirectTo:'dashboard/home'
   }
