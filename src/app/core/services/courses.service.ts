@@ -11,7 +11,6 @@ let DATABASE_COURSES: Course[] = [
   {id:'2', name:'hojaleteria', class:40 },
   {id:'3', name:'electricidad', class:15 },
   {id:'4', name:'pintura', class:10 }
-
 ]
 
 @Injectable({

@@ -9,6 +9,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { UsersModule } from './users/users.module';
 import { SharedModule } from '../../shared/shared.module';
+import { CoursesModule } from './courses/courses.module';
 
 
 @NgModule({
@@ -22,8 +23,7 @@ import { SharedModule } from '../../shared/shared.module';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    UsersModule,
-    SharedModule
+    SharedModule,
   ],
   exports:[DashboardComponent]
 })

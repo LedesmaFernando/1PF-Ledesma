@@ -1,16 +1,27 @@
-<p>auth works!</p>
-
-<mat-nav-list>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
     <h3>Secciones</h3>
 
-      <mat-nav-list class="col-3">
-       <a routerLink="" mat-list-item class="center">INICIO</a>
-       <a routerLink="/dashboard" mat-list-item>USUARIOS</a>
-       <a routerLink="" mat-list-item>CURSOS</a>
-       <a routerLink="/auth/register" mat-list-item>REGISTRAR</a>
-       <a routerLink="/auth/login" mat-list-item>CERRAR SESION</a>
-      </mat-nav-list>
+    <mat-nav-list>
+     <a routerLink="/dashboard" mat-list-item>INICIO</a>
+     <a routerLink="/dashboard/users" mat-list-item>ALUMNOS</a>
+     <a routerLink="/dashboard/courses" mat-list-item>CURSOS</a>
+     <a routerLink="/auth/login" mat-list-item>CERRAR SESION</a>
+    </mat-nav-list>
+  
+  </mat-drawer>
 
+  <div class="example-sidenav-content">
+      <mat-toolbar>
+          <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span>Menú</span>
+        </mat-toolbar>
 
-  </mat-nav-list>
-<router-outlet></router-outlet>
+        <!-- aca debe ir el router -->
+         <router-outlet></router-outlet>
+        <!-- <app-users /> -->
+  </div>
+
+</mat-drawer-container>
