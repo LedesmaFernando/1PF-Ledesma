@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,7 +15,6 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [
     AuthComponent,
     LoginComponent,
-    RegisterComponent
   ],
   imports: [
     CommonModule,
