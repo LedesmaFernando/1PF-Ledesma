@@ -11,6 +11,7 @@ import { UserFullNamePipe } from './pipes/user-full-name.pipe';
 import { FontTitlesDirective } from './directives/font-titles.directive';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -32,7 +33,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatTableModule,
     UserFullNamePipe,
     FontTitlesDirective,
-    MatListModule
+    MatListModule,
+    MatCardModule
+    
   ]
 })
 export class SharedModule { }

@@ -5,7 +5,8 @@ export interface User{
     course:string;
     email:string;
     createdAt: Date;
-
+    password:string;
+    token:string;
 }
 
 export interface Course{
