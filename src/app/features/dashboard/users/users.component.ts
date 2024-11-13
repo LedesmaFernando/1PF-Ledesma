@@ -17,7 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UsersComponent implements OnInit{
 
-  displayedColumns: string[] = ['id', 'name', 'email', 'course', 'date', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'date', 'actions'];
   dataSource: User[] = [];
 
 

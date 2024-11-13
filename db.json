@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": "4471",
+      "firstName": "Juan",
+      "lastName": "Perez",
+      "email": "jperez@gmail.com",
+      "password": "123456",
+      "role": "ADMIN",
+      "token": "asdasdaede",
+      "createdAt": "2024-11-13T21:09:28.166Z"
+    }
+  ],
+  "classes": []
+}

@@ -19,12 +19,7 @@
           <th mat-header-cell *matHeaderCellDef> Nombre </th>
           <td mat-cell *matCellDef="let user"> {{user | userFullName}} </td>
         </ng-container>
-
-        <ng-container matColumnDef="course">
-          <th mat-header-cell *matHeaderCellDef> Cursos </th>
-          <td mat-cell *matCellDef="let user"> {{user.course}} </td>
-        </ng-container>
-      
+  
         
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef> Email </th>

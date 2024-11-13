@@ -6,7 +6,7 @@ import { map, Observable, of } from 'rxjs';
 
 
 let DATABASE_USERS: User[] = [
-  {id: '1', firstName: 'Juan', lastName: 'Perez', course:'carpinteria', email:'jperez@gmail.com', createdAt: new Date, password:'2020', token:"99995"},
+  {id: '1', firstName: 'Juan', lastName: 'Perez', email:'jperez@gmail.com', createdAt: new Date, password:'2020', token:"99995", role:"alumno"},
   // {id: '2', firstName:'Jose', lastName:'Gonzales', course:'carpinteria',email:'jgonzales@gmail.com', createdAt: new Date},
   // {id: '3', firstName:'Facundo', lastName:'Duran', course:'carpinteria', email:'fduran@gmail.com', createdAt: new Date},
   // {id: '4', firstName:'Fernando', lastName:'Ledesma', course:'carpinteria', email:'fledesma.com', createdAt: new Date},
