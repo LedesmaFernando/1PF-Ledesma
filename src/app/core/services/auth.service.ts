@@ -4,17 +4,9 @@ import { BehaviorSubject, map, Observable, of, throwError } from 'rxjs';
 import { User } from '../../features/dashboard/users/models';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
-
-// const FAKE_USER: User = {
-//     id:'10',
-//     firstName:'admin',
-//     lastName:'admin',
-//     email:'admin@email.com',
-//     createdAt: new Date,
-//     password: '1234',
-//     token:'8888'
-// }
+import { Store } from '@ngrx/store';
+import { AuthActions } from '../../store/actions/auth.actions';
+import { selectAuthenticatedUser } from '../../store/selectors/auth.selector';
 
 
 @Injectable({
@@ -22,17 +14,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private _authUser$ = new BehaviorSubject<null | User>(null);
+  // private _authUser$ = new BehaviorSubject<null | User>(null);
 
-  public authUser$ = this._authUser$.asObservable();
+  public authUser$ : Observable<User | null>;
 
-  constructor(private router:Router, private httpClient:HttpClient) { }
+  constructor(private router:Router, private httpClient:HttpClient, private store:Store) { 
+    this.authUser$ = this.store.select(selectAuthenticatedUser);
+  }
 
 
   private handleAuthenticaion(users:User[]):User | null{
     if(!!users[0]){
       //sucess
-      this._authUser$.next(users[0]);
+      this.store.dispatch(AuthActions.setAuthenticatedUser({user:users[0]}))
+      // this._authUser$.next(users[0]);
       localStorage.setItem('token',users[0].token);
       return users[0]
     }else{
@@ -50,18 +45,11 @@ export class AuthService {
       }else{
         throw throwError(()=> new Error('Los datos son invalidos'))
       }}))
-    // if(data.email != FAKE_USER.email || data.password != FAKE_USER.password){
-    //   return throwError(()=> new Error('Los datos son invalidos'))
-    // }
-    // this._authUser$.next(FAKE_USER);
-    // localStorage.setItem('token',FAKE_USER.token)
-
-    // return of(FAKE_USER);
-
   }
 
   logOut():void{
-    this._authUser$.next(null);
+    // this._authUser$.next(null);
+    this.store.dispatch(AuthActions.unsetAuthenticatedUser())
     localStorage.removeItem('token');
     this.router.navigate(['auth','login']);
   }
@@ -74,13 +62,6 @@ export class AuthService {
       return !! user;
 
     }))
-    // const isValid = localStorage.getItem('token') === FAKE_USER.token;
-    // if(isValid){
-    //   this._authUser$.next(FAKE_USER);
-    // }else{
-    //   this._authUser$.next(null);
-    // }
-    // return of(isValid);
-
+  
   }
 }
