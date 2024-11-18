@@ -8,10 +8,3 @@ export interface User{
     token:string;
     role:string;
 }
-
-export interface Course{
-    id:string;
-    name:string;
-    class:number;
-
-}

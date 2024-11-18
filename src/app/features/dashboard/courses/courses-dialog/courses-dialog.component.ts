@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { Course } from '../../users/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Course } from '../models';
 
 
 
@@ -25,7 +25,7 @@ export class CoursesDialogComponent {
 
     this.courseForm = this.formBuilder.group({
       name:[null, [Validators.required]],
-      class:[null, [Validators.required]],
+      // class:[null, [Validators.required]],
     });
     this.patchFormValue();
   }

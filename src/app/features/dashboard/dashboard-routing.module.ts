@@ -4,6 +4,7 @@ import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
 import { HomeModule } from './home/home.module';
 import { ClassesModule } from './classes/classes.module';
+import { EnrollmentModule } from './enrollment/enrollment.module';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'classes',
     loadChildren: ()=> ClassesModule
+  },
+  {
+    path:'enrollment',
+    loadChildren: ()=> EnrollmentModule
   },
   {
     path:'**',

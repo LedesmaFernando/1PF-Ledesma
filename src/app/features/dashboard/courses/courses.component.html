@@ -20,17 +20,14 @@
           <td mat-cell *matCellDef="let course"> {{course.name}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="class">
-          <th mat-header-cell *matHeaderCellDef> Clases </th>
-          <td mat-cell *matCellDef="let course"> {{course.class}} </td>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Agregado </th>
+          <td mat-cell *matCellDef="let course"> {{course.createdAt | date}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Acciones </th>
           <td mat-cell *matCellDef="let course">
-              <button (click)="goToDetailCourse(course.id)" mat-icon-button>
-                  <mat-icon>visibility</mat-icon>
-              </button>
               <button (click)="openModalCourse(course)" mat-icon-button>
                   <mat-icon>edit</mat-icon>
               </button>

@@ -12,6 +12,7 @@ import { FontTitlesDirective } from './directives/font-titles.directive';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -34,8 +35,8 @@ import { MatCardModule } from '@angular/material/card';
     UserFullNamePipe,
     FontTitlesDirective,
     MatListModule,
-    MatCardModule
-    
+    MatCardModule,
+    MatRadioModule
   ]
 })
 export class SharedModule { }

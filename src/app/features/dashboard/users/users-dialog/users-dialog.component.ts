@@ -28,8 +28,9 @@ export class UsersDialogComponent {
     this.userForm = this.formBuilder.group({
       firstName:[null, [Validators.required]],
       lastName:[null, [Validators.required]],
-      course:[null, [Validators.required]],
+      password:[null, [Validators.required]],
       email:[null, [Validators.required]],
+      role:[null, [Validators.required]]
     });
     this.patchFormValue();
   }
@@ -41,7 +42,6 @@ export class UsersDialogComponent {
   }
 
   onSave(): void{
-    // this.matDialogRef.close({result:'ok'})
     if(this.userForm.invalid){
       this.userForm.markAllAsTouched();
     }else{

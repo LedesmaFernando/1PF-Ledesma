@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../../core/services/courses.service';
-import { Course } from '../users/models';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesDialogComponent } from './courses-dialog/courses-dialog.component';
+import { Course } from './models';
 
 
 
@@ -15,7 +15,7 @@ import { CoursesDialogComponent } from './courses-dialog/courses-dialog.componen
 })
 export class CoursesComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'class', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'date', 'actions'];
   dataSource: Course[] = [];
   // dataSource = new MatTableDataSource<Course>();
 
@@ -33,7 +33,7 @@ export class CoursesComponent implements OnInit {
   }
 
   loadCourses(): void {
-    this.courseService.getCourse().subscribe({
+    this.courseService.getCourses().subscribe({
       next:(courses) => {
         this.dataSource = courses;
         // this.dataSource.data = courses;        
@@ -47,10 +47,6 @@ export class CoursesComponent implements OnInit {
         next:(courses)=> {this.dataSource = courses}
       })
     }
-  }
-
-  goToDetailCourse(id:string):void{
-    this.router.navigate([id,'detail'],{ relativeTo: this.activatedRoute })    
   }
 
   openModalCourse(editingCourse?:Course): void{
@@ -69,9 +65,11 @@ export class CoursesComponent implements OnInit {
           if(editingCourse){
             this.handleUpdate(editingCourse.id, result)  
           }else{
-            this.dataSource = [...this.dataSource,{
-            ...result, id: this.dataSource.length+1, createdAt: new Date()
-          }]
+            this.courseService.createCourse(result)
+            .subscribe({ next: ()=> this.loadCourses()});
+          //   this.dataSource = [...this.dataSource,{
+          //   ...result, id: this.dataSource.length+1, createdAt: new Date()
+          // }]
           }
         }
       }
@@ -79,7 +77,7 @@ export class CoursesComponent implements OnInit {
   }
 
   handleUpdate(id:string, update: Course):void{
-    this.courseService.updateCourseById(id, update).subscribe({
+    this.courseService.updateCoursesById(id, update).subscribe({
       next:(course) => {this.dataSource = course}
     })
   }

@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../features/dashboard/users/models';
-import { map, Observable, of } from 'rxjs';
-
-
-
-
-let DATABASE_USERS: User[] = [
-  {id: '1', firstName: 'Juan', lastName: 'Perez', email:'jperez@gmail.com', createdAt: new Date, password:'2020', token:"99995", role:"alumno"},
-  // {id: '2', firstName:'Jose', lastName:'Gonzales', course:'carpinteria',email:'jgonzales@gmail.com', createdAt: new Date},
-  // {id: '3', firstName:'Facundo', lastName:'Duran', course:'carpinteria', email:'fduran@gmail.com', createdAt: new Date},
-  // {id: '4', firstName:'Fernando', lastName:'Ledesma', course:'carpinteria', email:'fledesma.com', createdAt: new Date},
-];
+import { concatMap, map, Observable, of } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
+import { HttpClient } from '@angular/common/http';
+import { generateRandomString } from '../../shared/utils';
 
 
 @Injectable({
@@ -18,31 +11,37 @@ let DATABASE_USERS: User[] = [
 })
 export class UsersService {
 
-  constructor() { }
+  private baseURL = environment.apiBaseURL;
 
-  getUsers(): Observable<User[]>{
-    return new Observable((observer)=>{
-      observer.next(DATABASE_USERS);
-    })
+  constructor(private httpClient:HttpClient) { }
+
+
+    getUsers(): Observable<User[]>{
+      return this.httpClient.get<User[]>(`${this.baseURL}/users`);
+    }
+  
+
+  createUser(data:Omit<User,'id'>): Observable<User>{
+    return this.httpClient.post<User>(`${this.baseURL}/users`,
+      {...data, 
+        createdAt: new Date().toISOString(),
+        token:generateRandomString(20)
+      });
   }
 
   getUsersById(id:string):Observable<User | undefined>{
-    return this.getUsers().pipe(map((users)=> users.find((u)=>u.id === id)))
+    return this.httpClient.get<User>(`${this.baseURL}/users/${id}`)
   }
 
-  // }
 
   updateUsersById(id:string, update: Partial<User>){
-    DATABASE_USERS = DATABASE_USERS.map((user)=> 
-      user.id === id ? {...user,...update}: user );
-    return new Observable<User[]>((observer)=>
-      observer.next(DATABASE_USERS)
-    )
+    return this.httpClient.patch<User>(`${this.baseURL}/users/${id}`,{...update}).
+    pipe(concatMap(()=> this.getUsers()));
   }
 
   removeUserById(id:string):Observable<User[]>{
-    DATABASE_USERS = DATABASE_USERS.filter((user) => user.id != id);
-    return of(DATABASE_USERS);
+    return this.httpClient.delete<User>(`${this.baseURL}/users/${id}`).
+    pipe(concatMap(()=> this.getUsers()));
 
   }
 }

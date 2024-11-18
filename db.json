@@ -9,6 +9,28 @@
       "role": "ADMIN",
       "token": "asdasdaede",
       "createdAt": "2024-11-13T21:09:28.166Z"
+    },
+    {
+      "id": "72d4",
+      "firstName": "ramon editado",
+      "lastName": "suarez",
+      "password": "12345",
+      "email": "rsuarez",
+      "role": "user",
+      "createdAt": "2024-11-18T21:33:39.215Z",
+      "token": "nJvSG0xDPKhOZ1cePbeu"
+    }
+  ],
+  "courses": [
+    {
+      "id": "asda",
+      "name": "Reparacion de Pc",
+      "createdAt": "2024-11-13T21:09:28.166Z"
+    },
+    {
+      "id": "b94b",
+      "name": "pinura",
+      "createdAt": "2024-11-18T22:51:30.223Z"
     }
   ],
   "classes": []

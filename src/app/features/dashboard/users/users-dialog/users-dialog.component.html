@@ -15,16 +15,25 @@
                     <input formControlName="lastName" matInput type="text">
                 </mat-form-field>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <mat-form-field class="example-form-field w-100">
                     <mat-label>Email</mat-label>
                     <input formControlName="email" matInput type="email">
                 </mat-form-field>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <mat-form-field class="example-form-field w-100">
-                    <mat-label>Curso</mat-label>
-                    <input formControlName="course" matInput type="text">
+                    <mat-label>Contraseña</mat-label>
+                    <input formControlName="password" matInput type="password">
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="example-form-field w-100">
+                    <mat-label>Seleccione un rol</mat-label>
+                    <mat-select formControlName="role">
+                        <mat-option value="user">Usuario</mat-option>
+                        <mat-option value="admin">Administrador</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
         </div>

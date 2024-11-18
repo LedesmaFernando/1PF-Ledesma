@@ -1,0 +1,19 @@
+<p>enrollment works!</p>
+
+<form [formGroup]="enrollmentFrom" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Curso</mat-label>
+        <mat-select formControlName="courseId">
+            <mat-option [value]="course.id" *ngFor="let course of courses$ | async">{{course.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="userId">
+            <mat-option [value]="user.id" *ngFor="let user of users$ | async">{{user.firstName}} {{user.lastName}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button type="submit" mat-flat-button>Guardar</button>
+
+</form>
+<pre>{{ enrollments$ | async | json }}</pre>

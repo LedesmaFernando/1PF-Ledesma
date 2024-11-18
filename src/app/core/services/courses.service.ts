@@ -1,50 +1,69 @@
 import { Injectable } from '@angular/core';
-import { Course } from '../../features/dashboard/users/models';
-import { Observable, of, map } from 'rxjs';
+import { Observable, of, map, concatMap } from 'rxjs';
+import { Course } from '../../features/dashboard/courses/models';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.development';
 
 
-
-
-
-
-let DATABASE_COURSES: Course[] = [
-  {id:'1', name:'carpinteria', class:20 },
-  {id:'2', name:'hojaleteria', class:40 },
-  {id:'3', name:'electricidad', class:15 },
-  {id:'4', name:'pintura', class:10 }
-]
+// let DATABASE_COURSES: Course[] = [
+//   {id:'1', name:'carpinteria', createdAt: new Date },
+//   {id:'2', name:'hojaleteria', createdAt: new Date },
+//   {id:'3', name:'electricidad', createdAt: new Date },
+//   {id:'4', name:'pintura', createdAt: new Date }
+// ]
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
-  constructor() { }
+  private baseURL = environment.apiBaseURL;
 
-  getCourse(): Observable<Course[]>{
-    return new Observable((observer)=>{
-      observer.next(DATABASE_COURSES);
-    })
-    // return of(DATABASE_COURSES);
+  constructor(private httpClient:HttpClient) { }
+
+  // getCourse(): Observable<Course[]>{
+  //   return this.httpClient.get<Course[]>(`${this.baseURL}/courses`);
+  // }
+
+  // createCourse(data:Omit<Course,'id'>): Observable<Course>{
+  //   return this.httpClient.post<Course>(`${this.baseURL}/courses`,
+  //     {...data, 
+  //       createdAt: new Date().toISOString(),
+  //     });
+  // }
+
+  // updateCourseById(id:string, update: Partial<Course>){
+  //   return this.httpClient.patch<Course>(`${this.baseURL}/courses/${id}`,{...update}).
+  //   pipe(concatMap(()=> this.getCourse()));
+  // }
+
+  // removeCourseById(id:string):Observable<Course[]>{
+  //   return this.httpClient.delete<Course>(`${this.baseURL}/courses/${id}`).
+  //   pipe(concatMap(()=> this.getCourse()));
+
+  // }
+  getCourses(): Observable<Course[]>{
+    return this.httpClient.get<Course[]>(`${this.baseURL}/courses`);
   }
 
-  getCourseById(id:string):Observable<Course | undefined>{
-    return this.getCourse().pipe(map((course)=> course.find((c)=>c.id === id)))
-  }
 
-  updateCourseById(id:string, update: Partial<Course>){
-    DATABASE_COURSES = DATABASE_COURSES.map((courses)=> 
-      courses.id === id ? {...courses,...update}: courses );
-    return new Observable<Course[]>((observer)=>
-      observer.next(DATABASE_COURSES)
-    )
-  }
+createCourse(data:Omit<Course,'id'>): Observable<Course>{
+  return this.httpClient.post<Course>(`${this.baseURL}/courses`,
+    {...data, 
+      createdAt: new Date().toISOString()
+    });
+}
 
-  removeCourseById(id:string):Observable<Course[]>{
-    DATABASE_COURSES = DATABASE_COURSES.filter((course) => course.id != id);
-    return of(DATABASE_COURSES);
+updateCoursesById(id:string, update: Partial<Course>){
+  return this.httpClient.patch<Course>(`${this.baseURL}/courses/${id}`,{...update}).
+  pipe(concatMap(()=> this.getCourses()));
+}
 
-  }
+removeCourseById(id:string):Observable<Course[]>{
+  return this.httpClient.delete<Course>(`${this.baseURL}/courses/${id}`).
+  pipe(concatMap(()=> this.getCourses()));
+
+}
 
  
 }
