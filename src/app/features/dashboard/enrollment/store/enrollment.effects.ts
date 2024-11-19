@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { concatMap } from 'rxjs/operators';
-import { Observable, EMPTY } from 'rxjs';
+import { catchError, concatMap, map } from 'rxjs/operators';
+import { Observable, EMPTY, of } from 'rxjs';
 import { EnrollmentActions } from './enrollment.actions';
+import { EnrollmentsService } from '../../../../core/services/enrollments.service';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class EnrollmentEffects {
 
 
-  // loadEnrollments$ = createEffect(() => {
-  //   return this.actions$.pipe(
+  loadEnrollments$: Actions<Action<string>>;
 
-  //     ofType(EnrollmentActions.loadEnrollments),
-  //     /** An EMPTY observable only emits completion. Replace with your own observable API request */
-  //     concatMap(() => EMPTY as Observable<{ type: string }>)
-  //   );
-  // });
+  constructor(private actions$: Actions, private enrollmentsService:EnrollmentsService) {
 
-  constructor(private actions$: Actions) {}
+    this.loadEnrollments$ = createEffect(() => {
+      return this.actions$.pipe(
+  
+        ofType(EnrollmentActions.loadEnrollments),
+        concatMap(() => this.enrollmentsService.getEnrollments().
+        pipe(map((response)=> EnrollmentActions.loadEnrollmentsSuccess({data:response})),
+        catchError((error)=> of(EnrollmentActions.loadEnrollmentsFailure(error)))
+      
+      )
+    )
+      );
+    });
+  }
 }

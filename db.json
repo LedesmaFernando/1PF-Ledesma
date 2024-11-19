@@ -33,5 +33,11 @@
       "createdAt": "2024-11-18T22:51:30.223Z"
     }
   ],
-  "classes": []
+  "enrollments": [
+    {
+      "id":"a3da",
+      "userId":"72d4",
+      "courseId":"asda"
+    }
+  ]
 }
