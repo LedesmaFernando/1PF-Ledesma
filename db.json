@@ -29,15 +29,20 @@
     },
     {
       "id": "b94b",
-      "name": "pinura",
+      "name": "pintura",
+      "createdAt": "2024-11-18T22:51:30.223Z"
+    },
+    {
+      "id": "b34b",
+      "name": "carpinteria",
       "createdAt": "2024-11-18T22:51:30.223Z"
     }
   ],
   "enrollments": [
     {
-      "id":"a3da",
-      "userId":"72d4",
-      "courseId":"asda"
+      "id": "a3da",
+      "userId": "72d4",
+      "courseId": "asda"
     }
   ]
 }

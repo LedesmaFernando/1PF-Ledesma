@@ -12,6 +12,9 @@ export class EnrollmentsService {
   constructor(private httClient:HttpClient) { }
 
   getEnrollments():Observable<Enrollment[]>{
-    return this.httClient.get<Enrollment[]>(`${environment.apiBaseURL}/enrollments`)
+    return this.httClient.get<Enrollment[]>(`${environment.apiBaseURL}/enrollments?_embed=user&_embed=course`)
+  };
+  createEnrollment(payload:Omit<Enrollment,'id'|'user'|'course'>):Observable<Enrollment>{
+    return this.httClient.post<Enrollment>(`${environment.apiBaseURL}/enrollments`, payload)
   }
 }

@@ -17,3 +17,7 @@ export const selectCoursesOptions = createSelector(
 export const selectUsersOptions = createSelector(
   selectEnrollmentState,(state)=>state.userOptions
 );
+
+export const selectLoadEnrollmentsError = createSelector(
+  selectEnrollmentState,(state)=> state.loadEnrollmentsError
+);

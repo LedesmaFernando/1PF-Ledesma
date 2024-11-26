@@ -4,42 +4,21 @@ import { Enrollment } from './models';
 import { Course } from '../../courses/models';
 import { User } from '../../users/models';
 
+
 export const enrollmentFeatureKey = 'enrollment';
-
-
-const enrollmentDB:Enrollment[] = [
-  {
-    id:'asap',
-    userId:'aqee',
-    courseId:'ñlld',
-  },
-  {
-    id:'dddd',
-    userId:'adad',
-    courseId:'klkl'
-  }
-];
-
-const coursesDB:Course[] = [
-  {id:'1', name:'carpinteria', createdAt: new Date },
-  {id:'2', name:'hojaleteria', createdAt: new Date }
-];
-
-const usersDB:User[] = [
-  {id: '1', firstName: 'Juan', lastName: 'Perez', email:'jperez@gmail.com', createdAt: new Date, password:'2020', token:"99995", role:"alumno"},
-  {id: '2', firstName:'Jose', lastName:'Gonzales',email:'jgonzales@gmail.com', createdAt: new Date, password:'8899', token:'99991', role:'admin'}
-];
 
 export interface State {
   enrollments:Enrollment[];
   coursesOptions:Course[];
   userOptions:User[];
+  loadEnrollmentsError: Error | null;
 }
 
 export const initialState: State = {
   enrollments:[],
   coursesOptions:[],
   userOptions:[],
+  loadEnrollmentsError: null,
 };
 
 export const reducer = createReducer(
@@ -47,27 +26,44 @@ export const reducer = createReducer(
   on(EnrollmentActions.loadEnrollments, state => 
   {
     return{
-      ...state, enrollments:[...enrollmentDB]
+      ...state
     }
   }
   ),
-  on(EnrollmentActions.loadCoursesOptions,(state)=>{
+  on(EnrollmentActions.loadEnrollmentsSuccess, (state, action)=>{
     return{
-      ...state,coursesOptions:[...coursesDB]
-      
-    }
-  } ),
-  on(EnrollmentActions.loadUsersOptions,(state)=>{
-    return{
-      ...state, userOptions:[...usersDB]
+      ...state, 
+      enrollments:action.data,
+      loadEnrollmentsError: null
     }
   }),
-  on(EnrollmentActions.createEnrollment,(state, action)=>{
+  on(EnrollmentActions.loadEnrollmentsFailure,(state, action)=>{
     return{
-      ...state, enrollments:[...state.enrollments,{id:'9999', courseId:action.courseId, userId:action.userId}]
+      ...state,
+      ...initialState,
+      loadEnrollmentsError: action.error
+    }
+
+  }),
+  on(EnrollmentActions.loadUsersAndCoursesOptions,(state)=>{
+    return{
+      ...state
+    }
+  }),
+  on(EnrollmentActions.loadUsersAndCoursesOptionsSuccess,(state,action)=>{
+    return{
+      ...state,
+      loadEnrollmentsError:null,
+      userOptions: action.users,
+      coursesOptions: action.courses
+    }
+  }),
+  on(EnrollmentActions.loadUsersAndCoursesOptionsFailure,(state, { error })=>{
+    return{
+      ...state,
+      loadEnrollmentsError:error
     }
   })
-
 );
 
 export const enrollmentFeature = createFeature({

@@ -16,4 +16,10 @@
     <button type="submit" mat-flat-button>Guardar</button>
 
 </form>
-<pre>{{ enrollments$ | async | json }}</pre>
+
+@if(LoadEnrollmentsError$ | async; as error){
+    <h2>Ocurrio un error!</h2>
+    <p>{{error['message']}}</p>
+}@else {
+    <pre>{{ enrollments$ | async | json }}</pre>
+}
